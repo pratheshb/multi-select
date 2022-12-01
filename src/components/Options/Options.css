@@ -19,3 +19,12 @@
 .drop-down-container :last-child {
     margin-bottom: 4px;
 }
+
+.option {
+    line-height: 36px;
+    padding-left: 8px;
+}
+
+.option:hover {
+    background-color: rgb(240, 240, 240);
+}
