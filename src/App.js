@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div className='container'>
-      <div>Select Colors</div>
+      <div className='multi-select-label'>Select Colors</div>
       <MultiSelect
         options={['Blue', 'Purple', 'Red', 'Green', 'Black', 'Brown', 'Cyan', 'Orange', 'Violet', 'Teal', 'Pink']}
         SelectedOptions={SelectedColors}
@@ -38,7 +38,7 @@ function App() {
         onClear={handleColorRemove}
         onClearAll={() => setSelectedColors([])}
       />
-      <div>Select Size</div>
+      <div className='multi-select-label'>Select Size</div>
       <MultiSelect
         options={['Small', 'Medium', 'Large']}
         SelectedOptions={SelectedSizes}

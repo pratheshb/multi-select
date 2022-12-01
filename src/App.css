@@ -5,3 +5,9 @@
   transform: translate(-50%, -50%);
   width: 400px;
 }
+
+.multi-select-label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 32px;
+}
