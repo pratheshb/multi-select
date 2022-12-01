@@ -1,0 +1,17 @@
+.selected-option {
+    background: #dedede;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.clear-icon {
+    margin-left: 2px;
+    cursor: pointer;
+    margin-top: 2px;
+}

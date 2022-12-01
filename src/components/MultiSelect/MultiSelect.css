@@ -1,0 +1,27 @@
+.select-control {
+    position: relative;
+}
+
+.select-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #c7c7c7;
+    border-radius: 3px;
+}
+
+.select-value-container {
+    width: 100%;
+    min-width: 50px;
+}
+
+.select-icon-container {
+    display: inline-flex;
+    padding: 8px;
+}
+
+.clear-all-icon {
+    font-size: 14px;
+    margin-right: 4px;
+    cursor: pointer;
+}
