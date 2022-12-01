@@ -25,8 +25,9 @@ export default function MultiSelect(props) {
         <div className='select-control'>
             <div className="select-container">
                 <div className='select-value-container'>
-                    {props.SelectedOptions.map(option => (
+                    {props.SelectedOptions.map((option, index) => (
                         <SelectedOption
+                            key={index}
                             option={option}
                             onClear={props.onClear}
                         />
