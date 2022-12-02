@@ -1,11 +1,9 @@
 import './Options.css';
 export default function Options(props) {
-    const availableOptions = props.options.filter(option => !props.selectedOptions.includes(option));
-    const filteredOptions = availableOptions.filter(option => option.toLowerCase().includes(props.filterText.toLowerCase()));
     return (
         <div className="drop-down-container">
             {
-                filteredOptions.length > 0 ? filteredOptions.map(
+                props.options.length > 0 ? props.options.map(
                     (option, index) => (
                         <div
                             key={index}
