@@ -24,7 +24,7 @@ export default function MultiSelect(props) {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [ref, setIsExpanded, setFilterText]);
+    }, [ref]);
 
     const onToggle = function () {
         setIsExpanded(isExpanded => !isExpanded);
@@ -42,7 +42,7 @@ export default function MultiSelect(props) {
 
     const handleFilterKeyDown = function (e) {
         const length = props.selectedOptions.length
-        if (e.keyCode === 8) {
+        if (e.key === 'Backspace') {
             if (!filterText && length > 0) {
                 props.onClear(props.selectedOptions[length - 1])
             }
