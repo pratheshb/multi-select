@@ -1,12 +1,12 @@
 import './SelectedOption.css';
-import {MdClear} from 'react-icons/md'
+import { MdClear } from 'react-icons/md'
 
-export default function SelectedOption(props) {
+export default function SelectedOption({ option, onClear }) {
 
     return (
         <span className='selected-option'>
-            {props.option}
-            <MdClear onClick={() => props.onClear(props.option)} className='clear-icon'/>
+            {option}
+            <MdClear onClick={() => onClear(option)} className='clear-icon' />
         </span>
     )
 }

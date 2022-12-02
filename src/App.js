@@ -3,25 +3,25 @@ import './App.css';
 import MultiSelect from './components/MultiSelect/MultiSelect';
 
 function App() {
-  const [SelectedColors, setSelectedColors] = useState([]);
-  const [SelectedSizes, setSelectedSizes] = useState([]);
+  const [selectedColors, setSelectedColors] = useState([]);
+  const [selectedSizes, setSelectedSizes] = useState([]);
 
   const handleColorSelect = function (color) {
-    setSelectedColors(SelectedColors => ([
-      ...SelectedColors,
+    setSelectedColors(selectedColors => ([
+      ...selectedColors,
       color
     ]));
   }
 
   const handleSizeSelect = function (size) {
-    setSelectedSizes(SelectedSizes => ([
-      ...SelectedSizes,
+    setSelectedSizes(selectedSizes => ([
+      ...selectedSizes,
       size
     ]));
   }
 
   const handleColorRemove = function (color) {
-    setSelectedColors(SelectedColors => SelectedColors.filter(col => col !== color));
+    setSelectedColors(selectedColors => selectedColors.filter(col => col !== color));
   }
 
   const handleSizeRemove = function (size) {
@@ -33,7 +33,7 @@ function App() {
       <div className='multi-select-label'>Select Colors</div>
       <MultiSelect
         options={['Blue', 'Purple', 'Red', 'Green', 'Black', 'Brown', 'Cyan', 'Orange', 'Violet', 'Teal', 'Pink']}
-        SelectedOptions={SelectedColors}
+        selectedOptions={selectedColors}
         onSelect={handleColorSelect}
         onClear={handleColorRemove}
         onClearAll={() => setSelectedColors([])}
@@ -41,7 +41,7 @@ function App() {
       <div className='multi-select-label'>Select Size</div>
       <MultiSelect
         options={['Small', 'Medium', 'Large']}
-        SelectedOptions={SelectedSizes}
+        selectedOptions={selectedSizes}
         onSelect={handleSizeSelect}
         onClear={handleSizeRemove}
         onClearAll={() => setSelectedSizes([])}

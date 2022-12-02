@@ -28,3 +28,7 @@
 .option:hover {
     background-color: rgb(240, 240, 240);
 }
+
+.no-items {
+    text-align: center;
+}

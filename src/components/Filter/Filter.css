@@ -1,0 +1,14 @@
+.input-container {
+    flex-grow: 1;
+    margin: 4px;
+    width: 50px;
+}
+.select-input {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    width: 100%;
+    min-width: 2px;
+    outline: 0;
+    font-size: 14px;
+}
