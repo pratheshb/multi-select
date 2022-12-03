@@ -33,25 +33,25 @@ export default function MultiSelect({
         };
     }, [ref]);
 
-    const handleToggle = function () {
+    function handleToggle() {
         setIsExpanded(!isExpanded);
         setSelectedIndex(isExpanded ? -1 : 0);
     }
 
-    const handleSelect = function (option) {
+    function handleSelect(option) {
         setIsExpanded(false);
         setFilterText('');
         setSelectedIndex(-1);
         onSelect(option);
     }
 
-    const handleFilterChange = function (e) {
+    function handleFilterChange(e) {
         setIsExpanded(true);
         setFilterText(e.target.value);
         setSelectedIndex(0);
     }
 
-    const handleKeyBoardNavigation = function (key) {
+    function handleKeyBoardNavigation(key) {
         const lastIndex = filteredOptions.length - 1;
         if (key === 'ArrowDown') {
             setIsExpanded(true);
@@ -62,14 +62,14 @@ export default function MultiSelect({
         }
     }
 
-    const handleClear = function () {
+    function handleClear() {
         const length = selectedOptions.length;
         if (!filterText && length > 0) {
             onClear(selectedOptions[length - 1])
         }
     }
 
-    const handleFilterKeyDown = function (e) {
+    function handleFilterKeyDown(e) {
         if (e.key === 'Backspace') {
             handleClear();
         } else if (e.key.startsWith('Arrow')) {
@@ -106,7 +106,7 @@ export default function MultiSelect({
                 <Options
                     options={filteredOptions}
                     selectedIndex={selectedIndex}
-                    onMouseOver={i => setSelectedIndex(i)}
+                    onPointerEnter={i => setSelectedIndex(i)}
                     onSelect={handleSelect}
                 />)
             }

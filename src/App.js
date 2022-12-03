@@ -6,25 +6,25 @@ function App() {
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
 
-  const handleColorSelect = function (color) {
+  function handleColorSelect(color) {
     setSelectedColors(selectedColors => ([
       ...selectedColors,
       color
     ]));
   }
 
-  const handleSizeSelect = function (size) {
+  function handleSizeSelect(size) {
     setSelectedSizes(selectedSizes => ([
       ...selectedSizes,
       size
     ]));
   }
 
-  const handleColorRemove = function (color) {
+  function handleColorRemove(color) {
     setSelectedColors(selectedColors => selectedColors.filter(col => col !== color));
   }
 
-  const handleSizeRemove = function (size) {
+  function handleSizeRemove(size) {
     setSelectedSizes(selectedSizes => selectedSizes.filter(siz => siz !== size));
   }
 

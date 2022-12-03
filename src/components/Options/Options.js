@@ -3,7 +3,7 @@ export default function Options({
     options,
     selectedIndex,
     onSelect,
-    onMouseOver
+    onPointerEnter
 }) {
     return (
         <div className="drop-down-container">
@@ -11,7 +11,7 @@ export default function Options({
                 options.length > 0 ? options.map(
                     (option, index) => (
                         <div
-                            onMouseEnter={() => onMouseOver(index)}
+                            onMouseEnter={() => onPointerEnter(index)}
                             key={index}
                             onClick={() => onSelect(option)}
                             className={`option${selectedIndex === index ? ' active-option': ''}`}>
