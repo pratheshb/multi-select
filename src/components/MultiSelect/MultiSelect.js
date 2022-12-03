@@ -15,6 +15,7 @@ export default function MultiSelect({
     const ref = useRef(null);
     const [isExpanded, setIsExpanded] = useState(false);
     const [filterText, setFilterText] = useState('');
+    const [selectedIndex, setSelectedIndex] = useState(-1);
 
     const availableOptions = options.filter(option => !selectedOptions.includes(option));
     const filteredOptions = availableOptions.filter(option => option.toLowerCase().includes(filterText.toLowerCase()));
@@ -32,26 +33,49 @@ export default function MultiSelect({
         };
     }, [ref]);
 
-    const onToggle = function () {
-        setIsExpanded(isExpanded => !isExpanded);
+    const handleToggle = function () {
+        setIsExpanded(!isExpanded);
+        setSelectedIndex(isExpanded ? -1 : 0);
     }
 
     const handleSelect = function (option) {
         setIsExpanded(false);
         setFilterText('');
+        setSelectedIndex(-1);
         onSelect(option);
     }
 
     const handleFilterChange = function (e) {
+        setIsExpanded(true);
         setFilterText(e.target.value);
+        setSelectedIndex(0);
+    }
+
+    const handleKeyBoardNavigation = function (key) {
+        const lastIndex = filteredOptions.length - 1;
+        if (key === 'ArrowDown') {
+            setIsExpanded(true);
+            setSelectedIndex(selectedIndex === lastIndex ? 0 : selectedIndex + 1)
+        } else if (key === 'ArrowUp') {
+            setIsExpanded(true);
+            setSelectedIndex(selectedIndex <= 0 ? lastIndex : selectedIndex - 1)
+        }
+    }
+
+    const handleClear = function () {
+        const length = selectedOptions.length;
+        if (!filterText && length > 0) {
+            onClear(selectedOptions[length - 1])
+        }
     }
 
     const handleFilterKeyDown = function (e) {
-        const length = selectedOptions.length
         if (e.key === 'Backspace') {
-            if (!filterText && length > 0) {
-                onClear(selectedOptions[length - 1])
-            }
+            handleClear();
+        } else if (e.key.startsWith('Arrow')) {
+            handleKeyBoardNavigation(e.key);
+        } else if (e.key === 'Enter') {
+            isExpanded && filteredOptions.length > 0 && handleSelect(filteredOptions[selectedIndex]);
         }
     }
 
@@ -68,19 +92,21 @@ export default function MultiSelect({
                     ))}
                     <Filter
                         filterText={filterText}
-                        onFocus={() => setIsExpanded(true)}
+                        onFocus={handleToggle}
                         onKeyDown={handleFilterKeyDown}
                         onChange={handleFilterChange}
                     />
                 </div>
                 <div className='select-icon-container'>
                     {selectedOptions.length > 0 && <MdClear onClick={onClearAll} className='clear-all-icon' />}
-                    <MdKeyboardArrowDown onClick={onToggle} />
+                    <MdKeyboardArrowDown onClick={handleToggle} />
                 </div>
             </div>
             {isExpanded && (
                 <Options
                     options={filteredOptions}
+                    selectedIndex={selectedIndex}
+                    onMouseOver={i => setSelectedIndex(i)}
                     onSelect={handleSelect}
                 />)
             }

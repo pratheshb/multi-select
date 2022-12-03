@@ -25,7 +25,7 @@
     padding-left: 8px;
 }
 
-.option:hover {
+.active-option {
     background-color: rgb(240, 240, 240);
 }
 

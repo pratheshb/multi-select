@@ -7,12 +7,11 @@ export default function Filter({
     onChange
 }) {
     return (
-        <div className='input-container'>
+        <div onClick={onFocus} className='input-container'>
         <input 
         type="text"
         className='select-input'
-        value={filterText} 
-        onFocus={onFocus}
+        value={filterText}
         onKeyDown={onKeyDown} 
         onChange={onChange} />
     </div>
