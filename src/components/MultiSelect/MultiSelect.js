@@ -5,12 +5,18 @@ import SelectedOption from '../SelectedOption/SelectedOption';
 import Filter from '../Filter/Filter';
 import './MultiSelect.css';
 
-export default function MultiSelect(props) {
+export default function MultiSelect({
+    options,
+    selectedOptions,
+    onSelect,
+    onClear,
+    onClearAll
+}) {
     const ref = useRef(null);
     const [isExpanded, setIsExpanded] = useState(false);
     const [filterText, setFilterText] = useState('');
 
-    const availableOptions = props.options.filter(option => !props.selectedOptions.includes(option));
+    const availableOptions = options.filter(option => !selectedOptions.includes(option));
     const filteredOptions = availableOptions.filter(option => option.toLowerCase().includes(filterText.toLowerCase()));
 
     useEffect(() => {
@@ -33,7 +39,7 @@ export default function MultiSelect(props) {
     const handleSelect = function (option) {
         setIsExpanded(false);
         setFilterText('');
-        props.onSelect(option);
+        onSelect(option);
     }
 
     const handleFilterChange = function (e) {
@@ -41,10 +47,10 @@ export default function MultiSelect(props) {
     }
 
     const handleFilterKeyDown = function (e) {
-        const length = props.selectedOptions.length
+        const length = selectedOptions.length
         if (e.key === 'Backspace') {
             if (!filterText && length > 0) {
-                props.onClear(props.selectedOptions[length - 1])
+                onClear(selectedOptions[length - 1])
             }
         }
     }
@@ -53,22 +59,22 @@ export default function MultiSelect(props) {
         <div ref={ref} className='select-control'>
             <div className="select-container">
                 <div className='select-value-container'>
-                    {props.selectedOptions.map((option, index) => (
+                    {selectedOptions.map((option, index) => (
                         <SelectedOption
                             key={index}
                             option={option}
-                            onClear={props.onClear}
+                            onClear={onClear}
                         />
                     ))}
                     <Filter
                         filterText={filterText}
-                        onFilterFocus={() => setIsExpanded(true)}
-                        onFilterKeyDown={handleFilterKeyDown}
-                        onFilterChange={handleFilterChange}
+                        onFocus={() => setIsExpanded(true)}
+                        onKeyDown={handleFilterKeyDown}
+                        onChange={handleFilterChange}
                     />
                 </div>
                 <div className='select-icon-container'>
-                    {props.selectedOptions.length > 0 && <MdClear onClick={props.onClearAll} className='clear-all-icon' />}
+                    {selectedOptions.length > 0 && <MdClear onClick={onClearAll} className='clear-all-icon' />}
                     <MdKeyboardArrowDown onClick={onToggle} />
                 </div>
             </div>
