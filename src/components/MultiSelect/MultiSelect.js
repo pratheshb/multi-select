@@ -8,9 +8,7 @@ import './MultiSelect.css';
 export default function MultiSelect({
     options,
     selectedOptions,
-    onSelect,
-    onClear,
-    onClearAll
+    onSelectionChange,
 }) {
     const ref = useRef(null);
     const [isExpanded, setIsExpanded] = useState(false);
@@ -42,7 +40,14 @@ export default function MultiSelect({
         setIsExpanded(false);
         setFilterText('');
         setSelectedIndex(-1);
-        onSelect(option);
+        onSelectionChange([
+            ...selectedOptions,
+            option
+        ]);
+    }
+
+    function handleClear(option) {
+        onSelectionChange(selectedOptions.filter(opt => opt !== option));
     }
 
     function handleFilterChange(e) {
@@ -62,16 +67,16 @@ export default function MultiSelect({
         }
     }
 
-    function handleClear() {
+    function handleBackSpaceClear() {
         const length = selectedOptions.length;
         if (!filterText && length > 0) {
-            onClear(selectedOptions[length - 1])
+            handleClear(selectedOptions[length - 1])
         }
     }
 
     function handleFilterKeyDown(e) {
         if (e.key === 'Backspace') {
-            handleClear();
+            handleBackSpaceClear();
         } else if (e.key.startsWith('Arrow')) {
             handleKeyBoardNavigation(e.key);
         } else if (e.key === 'Enter') {
@@ -87,7 +92,7 @@ export default function MultiSelect({
                         <SelectedOption
                             key={index}
                             option={option}
-                            onClear={onClear}
+                            onClear={handleClear}
                         />
                     ))}
                     <Filter
@@ -98,7 +103,7 @@ export default function MultiSelect({
                     />
                 </div>
                 <div className='select-icon-container'>
-                    {selectedOptions.length > 0 && <MdClear onClick={onClearAll} className='clear-all-icon' />}
+                    {selectedOptions.length > 0 && <MdClear onClick={() => onSelectionChange([])} className='clear-all-icon' />}
                     <MdKeyboardArrowDown onClick={handleToggle} />
                 </div>
             </div>
