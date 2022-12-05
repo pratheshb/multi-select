@@ -97,6 +97,7 @@ export default function MultiSelect({
                     ))}
                     <Filter
                         filterText={filterText}
+                        isOptionSelected={selectedOptions.length > 0}
                         onFocus={handleToggle}
                         onKeyDown={handleFilterKeyDown}
                         onChange={handleFilterChange}
