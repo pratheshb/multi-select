@@ -14,3 +14,9 @@
     cursor: pointer;
     margin-top: 4px;
 }
+
+span.single-option {
+    background-color: transparent;
+    margin-right: 0;
+    padding: 0;
+}

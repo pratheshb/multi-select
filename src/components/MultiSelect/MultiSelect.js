@@ -9,13 +9,14 @@ export default function MultiSelect({
     options,
     selectedOptions,
     onSelectionChange,
+    isSingle
 }) {
     const ref = useRef(null);
     const [isExpanded, setIsExpanded] = useState(false);
     const [filterText, setFilterText] = useState('');
     const [selectedIndex, setSelectedIndex] = useState(-1);
 
-    const availableOptions = options.filter(option => !selectedOptions.includes(option));
+    const availableOptions = isSingle ? options : options.filter(option => !selectedOptions.includes(option));
     const filteredOptions = availableOptions.filter(option => option.toLowerCase().includes(filterText.toLowerCase()));
 
     useEffect(() => {
@@ -40,10 +41,11 @@ export default function MultiSelect({
         setIsExpanded(false);
         setFilterText('');
         setSelectedIndex(-1);
-        onSelectionChange([
+        const updatedOptions = isSingle ? [option] : [
             ...selectedOptions,
             option
-        ]);
+        ]
+        onSelectionChange(updatedOptions);
     }
 
     function handleClear(option) {
@@ -92,6 +94,7 @@ export default function MultiSelect({
                         <SelectedOption
                             key={index}
                             option={option}
+                            isSingle = {isSingle}
                             onClear={handleClear}
                         />
                     ))}

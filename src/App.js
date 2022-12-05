@@ -8,17 +8,18 @@ function App() {
 
   return (
     <div className='container'>
-      <div className='multi-select-label'>Select Colors</div>
+      <div className='multi-select-label'>Colors</div>
       <MultiSelect
         options={['Blue', 'Purple', 'Red', 'Green', 'Black', 'Brown', 'Cyan', 'Orange', 'Violet', 'Teal', 'Pink']}
         selectedOptions={selectedColors}
         onSelectionChange={(colors) => setSelectedColors(colors)}
       />
-      <div className='multi-select-label'>Select Size</div>
+      <div className='multi-select-label'>Size</div>
       <MultiSelect
         options={['Small', 'Medium', 'Large']}
         selectedOptions={selectedSizes}
         onSelectionChange={(sizes) => setSelectedSizes(sizes)}
+        isSingle={true}
       />
     </div>
   );
