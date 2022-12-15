@@ -44,7 +44,7 @@ export default function MultiSelect({
         const updatedOptions = isSingle ? [option] : [
             ...selectedOptions,
             option
-        ]
+        ];
         onSelectionChange(updatedOptions);
     }
 
@@ -62,17 +62,17 @@ export default function MultiSelect({
         const lastIndex = filteredOptions.length - 1;
         if (key === 'ArrowDown') {
             setIsExpanded(true);
-            setSelectedIndex(selectedIndex === lastIndex ? 0 : selectedIndex + 1)
+            setSelectedIndex(selectedIndex === lastIndex ? 0 : selectedIndex + 1);
         } else if (key === 'ArrowUp') {
             setIsExpanded(true);
-            setSelectedIndex(selectedIndex <= 0 ? lastIndex : selectedIndex - 1)
+            setSelectedIndex(selectedIndex <= 0 ? lastIndex : selectedIndex - 1);
         }
     }
 
     function handleBackSpaceClear() {
         const length = selectedOptions.length;
         if (!filterText && length > 0) {
-            handleClear(selectedOptions[length - 1])
+            handleClear(selectedOptions[length - 1]);
         }
     }
 
