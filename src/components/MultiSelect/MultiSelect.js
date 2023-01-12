@@ -30,7 +30,7 @@ export default function MultiSelect({
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [ref]);
+    }, []);
 
     function handleToggle() {
         setIsExpanded(!isExpanded);
